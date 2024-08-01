@@ -9,6 +9,8 @@ const getAllUsers = async (req, res) => {
     }
   };
 // Login a user
+
+
  const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -43,7 +45,7 @@ const getAllUsers = async (req, res) => {
   }
 };  
   // Create a new user
-   const createUser = async (req, res) => {
+  const createUser = async (req, res) => {
     try {
       const newUser = await User.create({
         firstname: req.body.firstname,

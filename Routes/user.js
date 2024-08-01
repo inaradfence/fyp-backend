@@ -3,6 +3,8 @@ const router = express.Router();
 const { getAllUsers,loginUser, createUser, getUserById, updateUser, deleteUser } =require('../Controlers/user.js');
 
 router.post('/login', loginUser);
+router.post('/login', loginUser);
+
 // Get all users
 // Get all users
 router.get('/users', getAllUsers);
