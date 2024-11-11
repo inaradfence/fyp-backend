@@ -1,21 +1,42 @@
 const Project = require('../modles/Project');
 
-// Create a new project
+console.log("Create a new project");
+
  const createProject = async (req, res) => {
-  try {
-    const project = new Project(req.body);
+  console.log("Create a new project");
+  try {   
+    const {
+      title,
+      description,
+      url,
+      file,
+      createdAt// Optional, will default to Date.now if not provided
+    }=req.body;
+
+console.log("project created");
+
+const project = new Project({
+  title,
+  url,
+  file,
+  createdAt
+});
+console.log("Received project:", req.body);
     await project.save();
-    res.status(201).send(project);  // 201 Created status code
+    res.status(201).send( {message: "Successfully project created"});
+    console.log("Project save");
+
   } catch (err) {
-    res.status(500).send(err);
+       res.status(500).send({ message: "Failed to create project", error: err });
   }
 };
 
+
 // Get all projects
- const getProjects = async (req, res) => {
+ const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
-    res.send(projects);
+    res.json(projects);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -65,5 +86,5 @@ const Project = require('../modles/Project');
 
 
 module.exports={
-  deleteProject,updateProject,getProjectById,getProjects,createProject
+  deleteProject,updateProject,getProjectById,getAllProjects,createProject
 }

@@ -1,14 +1,16 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
+// console.log("................contacting...............");
 
 const contactUsSchema = new Schema({
+  
   firstname: {
     type: String,
     required: true
   },
   lastname: {
     type: String,
-    required: true
+   
   },
   address: {
     type: String
@@ -18,7 +20,7 @@ const contactUsSchema = new Schema({
   },
   designation: {
     type: String,
-    enum: ['student', 'teacher', 'admin', 'alumni']
+    enum: ['Student', 'Teacher','Alumni']
   },
   email: {
     type: String,

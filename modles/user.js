@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-// Define the User schema
-const UserSchema = new Schema({
+console.log('schema is here');
+
+const userSchema = new mongoose.Schema({
   
   firstname: {
     type: String,
@@ -10,8 +10,7 @@ const UserSchema = new Schema({
   },
   lastname: {
     type: String,
-    required: true,
-  },
+    },
   email: {
     type: String,
     required: true,
@@ -25,19 +24,21 @@ const UserSchema = new Schema({
   designation: {
     type: String,
     required: true,
-    enum: ["teacher", "student", "alumni", "admin"],
+    enum: ["Teacher", "Student", "Alumni"],
   },
   address: {
     type: String,
-    required: true,
-  },
+    },
   institute: {
     type: String,
     required: true,
   },
 });
 
-// Create the User model from the schema
-const User = mongoose.model('User', UserSchema);
 
+
+
+
+// Create the User model from the schema
+const User = new mongoose.model("User", userSchema); 
 module.exports = User;

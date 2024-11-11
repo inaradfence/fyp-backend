@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { 
-  getProjects, 
+  getAllProjects, 
   createProject, 
   getProjectById, 
   updateProject, 
@@ -9,10 +9,10 @@ const {
 } =require('../Controlers/Project.js');
 
 // Get all projects
-router.get('/projects', getProjects);
+router.get('/api/projects', getAllProjects);
 
 // Create a new project
-router.post('/projects', createProject);
+router.post('/api/projects', createProject);
 
 // Middleware to get project by ID
 router.use('/projects/:id', getProjectById);

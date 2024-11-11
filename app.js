@@ -1,41 +1,61 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const userRoutes = require("./Routes/user");
-const contactRoutes=require("./Routes/Contact");
-const projectRoutes=require("./Routes/Project");
-
-
+const cors = require('cors');
+const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
+const connectDb= require('./Db/config');
+const router = require("./Routes/user");
+const ContactsController = require("./Routes/Contact");
+const AdminRoute = require("./Routes/Admin");
+const projectRoute = require ("./Routes/Project");
+const CourseRoute = require ("./Routes/Courses");
+const routes = require('./Routes/routes'); // Import your routes
+const cookieParser = require('cookie-parser'); // Add cookie-parser
 
-// Middleware
-app.use(cors());
+app.set("view engine", "ejs");
+app.set("Views", path.resolve("./Views"));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+// Middleware to parse incoming request bodies
+app.use(express.urlencoded({ extended: true }));
+// Routes
+app.use('/', routes); // Mount your routes
+
+// ########################################################################
+
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({
+  origin: 'http://localhost:3000', // Restrict to specific domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+}));
 
-// MongoDB connection
-const mongoURI = "mongodb://localhost:27017/Fyp";
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+//.......Admin Routes...........
 
-// Example route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.get("/api/admin", AdminRoute);
+app.get("/getContact", ContactsController );
+app.get("/api/projects", projectRoute);
+app.get("/api/users", router);
+app.get("/api/courses", CourseRoute);
 
-app.use('/api', userRoutes);
-app.use('/contact',contactRoutes);
-app.use('/project',projectRoutes);
-// Your routes go here
-// const userRoutes = require('./routes/users'); // Example
-// app.use('/users', userRoutes);
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port} `);
-});
+
+//...........Frontend..........
+app.get("/api/auth", router);
+app.post("/api/register", router);
+app.post("/api/contact", ContactsController);
+app.post("/api/projects", projectRoute);
+app.post("/api/courses", CourseRoute);
+
+
+connectDb().then(()=>{
+  const PORT=5000;
+  app.listen(PORT, ()=>{
+      console.log(`port: ${PORT}`);
+  });
+  });
+
+  // .................................................................
+
+

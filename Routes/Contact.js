@@ -1,19 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const  {
-  createContactUs,
-  getAllContacts,
-  // getContactUsMessageById,
-  // updateContactUsMessage,
-  // deleteContactUsMessage,
-} =require( '../Controlers/Contact');
+const  {createContactUs,getAllContacts,} =require( '../Controlers/Contact');
 
 // Get all contact us messages
 router.get('/getContact', getAllContacts);
 
 // Create a new contact us message
-router.post('/createContact', createContactUs);
+console.log('contact route is going great');
+
+router.post('/api/contact', createContactUs);
 
 // Middleware to get contact us message by ID
 // router.use('/contact-us/:id', getContactUsMessageById);

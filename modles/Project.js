@@ -1,25 +1,24 @@
  const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const projectSchema = new Schema({
-  title: String,
-  description: String,
-  url: String,
+const projectSchema = new mongoose.Schema({
+  title: {
+    type : String,
+    required : true,
+  },
+  description: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
   file: {
     type: String,
-    enum: ['video', 'pdf', 'txt', 'excel']
+    
   },
-  likes: Number,
-  dislikes: Number,
-  ideas: [
-    {
-      text: String,
-      username: String,
-      email: String,
-      likes: Number,
-      dislikes: Number
-    }
-  ]
+  createdAt: { 
+    type: Date, 
+    default: Date.now },
+  
 });
 
 
