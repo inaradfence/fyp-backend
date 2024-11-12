@@ -1,4 +1,4 @@
-const Project = require('../modles/Project');
+const Project = require('../Models/Project');
 
 console.log("Create a new project");
 

@@ -1,10 +1,11 @@
-const Course = require('../modles/Courses');
+const Course = require('../Models/Course');
 
 // Controller to handle creating a new course
 const createCourse = async (req, res) => {
   try {
     const { courseTitle, description, image } = req.body;
 
+    console.log("creating.....");
     const newCourse = new Course({
       courseTitle,
       description,
@@ -13,6 +14,8 @@ const createCourse = async (req, res) => {
 
     const savedCourse = await newCourse.save();
     res.status(201).json(savedCourse);
+    console.log("saved.....");
+
   } catch (error) {
     res.status(500).json({ message: 'Failed to create course', error });
   }
@@ -21,6 +24,7 @@ const createCourse = async (req, res) => {
 // Controller to get all courses
 const getAllCourses = async (req, res) => {
   try {
+    console.log("courses are here");
     const courses = await Course.find();
     res.status(200).json(courses);
   } catch (error) {
