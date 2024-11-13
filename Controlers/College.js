@@ -23,7 +23,8 @@ const createCollege = async (req, res) => {
 const getAllColleges = async (req, res) => {
   try {
     const colleges = await College.find().populate('courses'); // Populates courses with course details
-    res.status(200).json(colleges);
+    // res.status(200).json("colleges");
+    res.render("colleges", {colleges});
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve colleges', error });
   }

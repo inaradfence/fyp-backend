@@ -65,7 +65,10 @@ const register = async (req, res) => {
     try {
         console.log("Fetching all users...");
         const users = await User.find(); // Fetch all users
-        res.render('/pages/tables/basic-table.html', { users : data}); // Render the EJS template with users data
+        res.render('users', { users } );
+        console.log(users);
+
+        // res.render('users', { users }); // Render the EJS template with users data
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

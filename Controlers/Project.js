@@ -17,6 +17,7 @@ console.log("project created");
 
 const project = new Project({
   title,
+  description,
   url,
   file,
   createdAt
@@ -36,8 +37,9 @@ console.log("Received project:", req.body);
  const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
-    res.json(projects);
-  } catch (err) {
+    res.render('projects', { projects } );
+    console.log("prject diplayed");
+      } catch (err) {
     res.status(500).send(err);
   }
 };

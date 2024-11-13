@@ -26,7 +26,8 @@ const getAllCourses = async (req, res) => {
   try {
     console.log("courses are here");
     const courses = await Course.find();
-    res.status(200).json(courses);
+    res.render('courses', { courses } );
+    
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve courses', error });
   }

@@ -47,7 +47,7 @@ app.post("/api/register", router);
 app.post("/api/login", router);
 app.post("/api/contact", ContactsController);
 app.post("/api/projects", projectRoute);
-app.post("/api/courses", CourseRoute);
+app.post("/createCourse", CourseRoute);
 app.post("/api/colleges", CollegeRoute);
 
 

@@ -4,7 +4,7 @@ const getAllContacts = async (req, res) => {
   try {
   console.log("contacts");
     const contacts = await ContactUs.find();
-    res.json(contacts);
+    res.render("contacts",{contacts});
   console.log(contacts);
 
   } catch (err) {
