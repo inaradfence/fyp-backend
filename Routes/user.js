@@ -1,5 +1,5 @@
 const express = require('express');
-const {home, register, getAllUsers, loginUser} = require('../Controlers/user');
+const {home, register, getAllUsers, loginUser} = require('../Controllers/user');
 const router = express.Router();
 
 router.route("/api/login").post(loginUser);

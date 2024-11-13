@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const  {createContactUs,getAllContacts,} =require( '../Controlers/Contact');
+const  {createContactUs,getAllContacts,} =require( '../Controllers/Contact');
 
 // Get all contact us messages
 router.get('/getContact', getAllContacts);

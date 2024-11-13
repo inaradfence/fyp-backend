@@ -6,7 +6,7 @@ const {
   getProjectById, 
   updateProject, 
   deleteProject 
-} =require('../Controlers/Project.js');
+} =require('../Controllers/Project.js');
 
 // Get all projects
 router.get('/api/projects', getAllProjects);

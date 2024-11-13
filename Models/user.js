@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+
 
 console.log('schema is here');
 
@@ -38,6 +41,19 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+
+userSchema.pre('save', async function (next) {
+
+  if (!this.isModified('password')) {
+      next()
+  }
+
+  const hashedpassword = await bcrypt.hash(this.password, 10);
+
+  this.password = hashedpassword;
+
+})
 
 
 
