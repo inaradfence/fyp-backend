@@ -68,18 +68,18 @@ const updateCourse = async (req, res) => {
   console.log("you will update here");
   try {
     const { courseTitle, description} = req.body;
-    console.log("Request body:", req.body);
+    console.log("Request body:", req.params);
     const updatedCourse = await Course.findByIdAndUpdate(
       req.params.id,
       { courseTitle, description },
       { new: true }
     );
-
+    console.log("update course", updateCourse);
     if (!updatedCourse) {
       return res.status(404).json({ message: 'Course not found' });
     }
-    
-   const  newUpdatedCourse = await updateCourse.save();
+    const courses = await Course.find();
+    res.render('courses', { courses } );
   } catch (error) {
     console.error("Save error:", error);
     res.status(500).json({ message: 'Failed to update course', error });
@@ -94,8 +94,8 @@ const deleteCourse = async (req, res) => {
     if (!deletedCourse) {
       return res.status(404).json({ message: 'Course not found' });
     }
-
-    res.status(200).json({ message: 'Course deleted successfully' });
+    const courses = await Course.find();
+    res.render('courses', { courses } );
   } catch (error) {
     res.status(500).json({ message: 'Failed to delete course', error });
   }

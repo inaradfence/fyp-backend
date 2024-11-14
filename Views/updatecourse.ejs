@@ -322,7 +322,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Update Course</h4>
-                                <form action="/api/update-courses/<%= course._id %>" method="PATCH">
+                                <form action="/api/update-courses/<%= course._id %>" method="POST">
                                   <div class="form-group">
                                       <label for="name">Course Title</label>
                                       <input type="text" id="name" name="courseTitle" value="<%= course.courseTitle %>" class="form-control" required>

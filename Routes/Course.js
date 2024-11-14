@@ -15,8 +15,8 @@ const { createCourse,
     router.route("/api/createCourse").get(createCourse);
     router.route("/api/createCourse").post(createCourse);
     // router.route("/api/updatecourses/:id").get(updateCourse);
-    router.route("/api/update-courses/:id").patch(updateCourse);
-    router.route("/api/deletecourses/:id").delete(deleteCourse);
+    router.route("/api/update-courses/:id").post(updateCourse);
+    router.route("/api/deletecourses/:id").get(deleteCourse);
 
     
 module.exports = router;

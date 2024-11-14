@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>PU-SIP</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/vendors/feather/feather.css">
   <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
@@ -97,7 +97,7 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src=" <%= admin.picture %>" alt="profile"/>
+            
             </a>                                             
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -276,12 +276,22 @@
             </div>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/getAnnouncement">Announcements </a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/api/courses">Courses </a></li>
               </ul>
             </div>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/api/colleges">Colleges </a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/api/getCards">Cards </a></li>
               </ul>
             </div>
           </li>
@@ -306,33 +316,33 @@
         <div class="content-wrapper">
             <div class="content-wrapper">
                 <div class="row">
+                                 
                     <!-- Profile Update Form -->
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Add Project</h4>
-                                <form action="/api/projects" method="POST" enctype="multipart/form-data">
-                                    <!-- Example fields, adjust as needed -->
-                                    <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" id="name" name="name" class="form-control" value="<%= admin.name %>" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input disabled type="email" id="email" name="email" class="form-control" value="<%= admin.email %>" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="bio">Bio</label>
-                                        <textarea id="bio" name="bio" class="form-control"><%= admin.bio %></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="picture">Profile Picture</label>
-                                        <input type="file" id="picture" name="picture" class="form-control-file">
-                                    </div>
-                                    <!-- Add more fields (image upload, etc.) as needed -->
-                
-                                    <button type="submit" class="btn btn-primary">Update Profile</button>
-                                </form>
+                                <h4 class="card-title">Update Course</h4>
+                                <form action="/api/update-project/<%= project._id %>" method="POST">
+                                  <div class="form-group">
+                                      <label for="name">Title</label>
+                                      <input type="text" id="name" name="courseTitle" value="<%= project.title %>" class="form-control" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="description">Description</label>
+                                      <input type="text" id="description" name="description" value="<%=project.description %>" class="form-control" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="description">URL</label>
+                                      <input type="text" id="description" name="url" value="<%=project.url %>" class="form-control" >
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="description">File</label>
+                                      <input type="text" id="description" name="file" value="<%=project.file %>" class="form-control" >
+                                  </div>
+                                  <button type="submit" class="btn btn-primary">Update</button>
+                                  <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
+                              </form>
+                              
                             </div>
                         </div>
                     </div>

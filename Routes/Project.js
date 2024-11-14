@@ -9,16 +9,17 @@ const {
 } =require('../Controllers/Project.js');
 
 // Get all projects
-router.get('/api/projects', getAllProjects);
+// router.get('/api/projects', getAllProjects); 
+router.route("/api/projects").get(getAllProjects);
+router.route("/api/project/:id").get(getProjectById); //show edit form
+router.route("/api/update-project/:id").post(updateProject); 
 
 // Create a new project
-router.post('/api/projects', createProject);
+router.post('/api/projects', createProject); //not working
 
-// Middleware to get project by ID
-router.use('/projects/:id', getProjectById);
 
-// Update a project
-router.patch('/projects/:id', updateProject);
+
+
 
 // Get a project by ID
 router.get('/projects/:id', (req, res) => {
@@ -26,7 +27,7 @@ router.get('/projects/:id', (req, res) => {
 });
 
 // Delete a project
-router.delete('/projects/:id', deleteProject);
+router.get('/api/delete-projects/:id', deleteProject);
 
 module.exports = router;
 

@@ -46,13 +46,16 @@ console.log("Received project:", req.body);
 
 // Get a single project by ID
  const getProjectById = async (req, res) => {
+  console.log("getProjecctById here", req.params);
+
   try {
     const projectId = req.params.id;  // Get ID from URL parameters
     const project = await Project.findById(projectId);
     if (!project) {
       return res.status(404).send({ message: 'Project not found' });
     }
-    res.send(project);
+    console.log(project);
+    res.render('updateprojects',{project});
   } catch (err) {
     res.status(500).send(err);
   }
@@ -61,12 +64,18 @@ console.log("Received project:", req.body);
 // Update a project by ID
  const updateProject = async (req, res) => {
   try {
-    const projectId = req.params.id;  // Get ID from URL parameters
-    const project = await Project.findByIdAndUpdate(projectId, req.body, { new: true });
+    const { title, description, url, file} = req.body;
+    console.log("Request body:", req.params);   
+     const project = await Project.findByIdAndUpdate(
+      req.params.id,
+      { title, description, url, file }, 
+      { new: true});
+    console.log("update project", project);
     if (!project) {
       return res.status(404).send({ message: 'Project not found' });
     }
-    res.send(project);
+    res.render('projects', { project} );
+    console.log("prject diplayed", project);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -89,4 +98,4 @@ console.log("Received project:", req.body);
 
 module.exports={
   deleteProject,updateProject,getProjectById,getAllProjects,createProject
-}
+};
