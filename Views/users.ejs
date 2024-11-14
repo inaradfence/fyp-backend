@@ -388,9 +388,10 @@
                          <td><%= user.email %></td>
                         <td><%= user.designation %></td>
                         <td><%= user.institute %></td>
-                        <td><a href="/api/updatecourses/:id" style="color:blue;">Edit/</a>
-                          <a  href="/api/deletecourses/:id" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
-                      </tr>
+                        <td>
+                          <a href="/api/courses/<%= user._id %>" style="color:blue;">Edit/</a>
+                          <a href="/api/deletecourses/<%= user._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+                        </tr>
                     <% }) %>
                   </tbody>
                 </table>

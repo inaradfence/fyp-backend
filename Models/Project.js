@@ -1,9 +1,9 @@
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
   title: {
-    type : String,
-    required : true,
+    type: String,
+    required: true,
   },
   description: {
     type: String,
@@ -13,15 +13,8 @@ const projectSchema = new mongoose.Schema({
   },
   file: {
     type: String,
-    
-  },
-  createdAt: { 
-    type: Date, 
-    default: Date.now },
-  
-});
-
+  }
+}, { timestamps: true });  // Adds createdAt and updatedAt automatically
 
 const Project = mongoose.model('Project', projectSchema);
 module.exports = Project;
-

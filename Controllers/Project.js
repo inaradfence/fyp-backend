@@ -10,7 +10,7 @@ console.log("Create a new project");
       description,
       url,
       file,
-      createdAt// Optional, will default to Date.now if not provided
+     
     }=req.body;
 
 console.log("project created");
@@ -20,7 +20,7 @@ const project = new Project({
   description,
   url,
   file,
-  createdAt
+  
 });
 console.log("Received project:", req.body);
     await project.save();
@@ -84,12 +84,13 @@ console.log("Received project:", req.body);
 // Delete a project by ID
  const deleteProject = async (req, res) => {
   try {
-    const projectId = req.params.id;  // Get ID from URL parameters
-    const project = await Project.findByIdAndDelete(projectId);
-    if (!project) {
+      const deletedProject = await Project.findByIdAndDelete(req.params.id);
+    if (!deletedProject) {
       return res.status(404).send({ message: 'Project not found' });
     }
-    res.send({ message: 'Project deleted successfully' });
+
+    const projects = await Project.find();
+    res.render('projects', { projects } );
   } catch (err) {
     res.status(500).send(err);
   }

@@ -89,6 +89,7 @@ app.post("/api/createCards", Cards);
 app.post("/api/update-courses/:id", CourseRoute);
 app.get("/api/deletecourses/:id", CourseRoute);
 app.post("/api/update-project/:id", projectRoute);
+app.get("/api/delete-projects/:id", projectRoute);
 
 
 
