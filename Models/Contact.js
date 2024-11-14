@@ -1,6 +1,5 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-// console.log("................contacting...............");
 
 const contactUsSchema = new Schema({
   

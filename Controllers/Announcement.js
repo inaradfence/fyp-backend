@@ -1,38 +1,45 @@
-const Schema = require('../Models/Announcement'); // Adjust the path if necessary
-
+const Announcement = require('../Models/Announcement');
 // Create a new announcement
 const createAnnouncement = async (req, res) => {
     const { title, description } = req.body;
-
-    try {
-        // Create a new schema instance
-        const newAnnouncement = new Schema({
+       try {
+        const newAnnouncement = new Announcement({
             title,
             description,
         });
-
-        // Save the announcement to the database
         await newAnnouncement.save();
-
-        res.status(201).json({
-            message: 'Announcement created successfully',
-            announcement: newAnnouncement
-        });
+        res.redirect('/getAnnouncement');
+        console.log("annocemfghj   4");
     } catch (err) {
         res.status(500).json({
+                    
             message: 'Error creating announcement',
             error: err.message
         });
+        console.log("error in annoucemect");   
     }
 };
 
 // Fetch all announcements
 const getAnnouncements = async (req, res) => {
     try {
-        const announcements = await Schema.find();
-        res.status(200).json({
-            announcements
+        const announcements = await Announcement.find();
+        res.render("announcement",{announcements});
+        console.log(announcements);
+    } catch (err) {
+        res.status(500).json({
+            message: 'Error fetching announcements',
+            error: err.message
         });
+    }
+};
+//Frontend
+const getAnnouncementsJson = async (req, res) => {
+    try {
+        console.log("announcements");
+        const announcements = await Announcement.find();
+        res.status(200).json(announcements);
+        console.log(announcements);
     } catch (err) {
         res.status(500).json({
             message: 'Error fetching announcements',
@@ -96,6 +103,7 @@ const deleteAnnouncement = async (req, res) => {
 };
 
 module.exports = {
+    getAnnouncementsJson,
     createAnnouncement,
     getAnnouncements,
     updateAnnouncement,

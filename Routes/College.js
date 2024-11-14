@@ -3,7 +3,7 @@ const router = express.Router();
 const CollegeController = require('../Controllers/College');
 
 // Route to create a new college
-router.post('/api/colleges', CollegeController.createCollege);
+router.post('/api/createColleges', CollegeController.createCollege);
 
 // Route to get all colleges
 router.get('/api/colleges', CollegeController.getAllColleges);

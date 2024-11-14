@@ -324,6 +324,11 @@
                 </div>
                 <div class="collapse" id="tables">
                   <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/getAnnouncement">Announcements </a></li>
+                  </ul>
+                </div>
+                <div class="collapse" id="tables">
+                  <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="/api/courses">Courses </a></li>
                   </ul>
                 </div>
@@ -332,7 +337,11 @@
                     <li class="nav-item"> <a class="nav-link" href="/api/colleges">Colleges </a></li>
                   </ul>
                 </div>
-               
+                <div class="collapse" id="tables">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="/api/getCards">Cards </a></li>
+                  </ul>
+                </div>              
               </li>
               
               <li class="nav-item">
@@ -371,9 +380,10 @@
                   <thead>
                     <tr>
                    
-                      <th>Course Title</th>
-                      <th>Description</th>
-                      <th>Image</th>
+                      <th scope-col>Course Title</th>
+                      <th scope-col>Description</th>
+                      <th scope-col>Image</th>
+                      <th scope-col>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -381,7 +391,10 @@
                         <td><%= course.courseTitle %></td>
                         <td><%= course.description %></td>
                         <td><%= course.image %></td>
-                     </tr>
+                        <td>
+                        <a href="/api/courses/<%= course._id %>" style="color:blue;">Edit/</a>
+                        <a href="/api/deletecourses/<%= course._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+                      </tr>
                     <% }) %>
                   </tbody> 
                   

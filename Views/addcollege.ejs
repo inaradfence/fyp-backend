@@ -276,12 +276,22 @@
             </div>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/getAnnouncement">Announcements </a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/api/courses">Courses </a></li>
               </ul>
             </div>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/api/colleges">Colleges </a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/api/getCards">Cards </a></li>
               </ul>
             </div>
           </li>
@@ -312,21 +322,22 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Add College</h4>
-                                <form action="/api/colleges" method="POST" enctype="multipart/form-data">
+                                <form action="/api/createColleges" method="POST" enctype="multipart/form-data">
                                     <!-- Example fields, adjust as needed -->
                                     <div class="form-group">
-                                        <label for="name">Course Title</label>
-                                        <input type="text" id="name" name="title" class="form-control" required>
+                                        <label for="name">College Name</label>
+                                        <input type="text" id="name" name="collegeName" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Description</label>
-                                        <input type="text" id="description" name="description" class="form-control" required>
+                                        <label for="email">City</label>
+                                        <input type="text" id="city" name="city" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Course Title</label>
+                                        <input type="text" id="description" name="course" class="form-control" required>
                                     </div>
                                  
-                                    <div class="form-group">
-                                        <label for="picture">Course Picture</label>
-                                        <input type="file" id="picture" name="picture" class="form-control-file">
-                                    </div>
+                                   
                                     <!-- Add more fields (image upload, etc.) as needed -->
                 
                                     <button type="submit" class="btn btn-primary">Add </button>

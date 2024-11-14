@@ -10,12 +10,13 @@ const { createCourse,
 
 
     router.route("/api/courses").get(getAllCourses);
-    router.route("/api/all-courses").get(getAllCoursesJson);
+    router.route("/api/all-courses").get(getAllCoursesJson); //frontend route
     router.route("/api/courses/:id").get(getCourseById);
     router.route("/api/createCourse").get(createCourse);
     router.route("/api/createCourse").post(createCourse);
-    router.route("/api/courses/:id").patch(updateCourse);
-    router.route("/api/courses/:id").delete(deleteCourse);
+    // router.route("/api/updatecourses/:id").get(updateCourse);
+    router.route("/api/update-courses/:id").patch(updateCourse);
+    router.route("/api/deletecourses/:id").delete(deleteCourse);
 
     
 module.exports = router;

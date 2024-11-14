@@ -45,14 +45,19 @@ const getAllCoursesJson = async (req, res) => {
 
 // Controller to get a single course by ID
 const getCourseById = async (req, res) => {
+  console.log("getCourseById here", req.params);
   try {
     const course = await Course.findById(req.params.id);
 
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
     }
+    console.log(course);
+    res.render('updatecourse',{course});
 
-    res.status(200).json(course);
+  console.log("rendered");
+
+
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve course', error });
   }
@@ -60,20 +65,23 @@ const getCourseById = async (req, res) => {
 
 // Controller to update a course by ID
 const updateCourse = async (req, res) => {
+  console.log("you will update here");
   try {
-    const { courseTitle, description, image } = req.body;
+    const { courseTitle, description} = req.body;
+    console.log("Request body:", req.body);
     const updatedCourse = await Course.findByIdAndUpdate(
       req.params.id,
-      { courseTitle, description, image },
+      { courseTitle, description },
       { new: true }
     );
 
     if (!updatedCourse) {
       return res.status(404).json({ message: 'Course not found' });
     }
-
-    res.status(200).json(updatedCourse);
+    
+   const  newUpdatedCourse = await updateCourse.save();
   } catch (error) {
+    console.error("Save error:", error);
     res.status(500).json({ message: 'Failed to update course', error });
   }
 };

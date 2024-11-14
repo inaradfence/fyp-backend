@@ -51,17 +51,6 @@ const register = async (req, res) => {
   }
 };
 
-// const getAllUsers = async (req, res) => {
-    // try {
-    // console.log("Users");
-  //     const users = await User.find();
-  //     res.json(users);
-  //   // console.log(contacts);
-  
-  //   } catch (err) {
-  //     res.status(500).json({ message: err.message });
-  //   }
-  // };
 
   const getAllUsers = async (req, res) => {
     try {
@@ -122,6 +111,57 @@ const register = async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   };  
-   
 
-module.exports = { home, register, getAllUsers, loginUser };
+  
+  const deleteUser = async (req, res) => {
+    console.log("Entering delete function");
+    try {
+      const userId = req.params.id;
+      console.log("User ID to delete:", userId);
+  
+      // Find the user by ID and delete
+      const user = await User.findById(userId);
+      console.log("User found");
+  
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Delete the user
+      await user.delete();  // Explicitly call delete() on the user document
+  
+      console.log("User deleted successfully");
+  
+      // Redirect after successful deletion
+      res.redirect('/api/users');
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    
+    }
+  };
+  
+  const updateUser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const { firstname, lastname, email, address, designation, institute } = req.body;
+  
+      // Update user information
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { firstname, lastname, email, address, designation, institute },
+        { new: true } // Return the updated document
+      );
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      res.status(200).json({ message: "User updated successfully", user: updatedUser });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
+  module.exports = { home, register, getAllUsers, loginUser, deleteUser, updateUser };
+  

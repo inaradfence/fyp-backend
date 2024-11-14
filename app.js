@@ -12,8 +12,10 @@ const projectRoute = require ("./Routes/Project");
 const CourseRoute = require ("./Routes/Course");
 const CollegeRoute = require ("./Routes/College");
 const Announcement = require ("./Routes/Announcement");
+const Cards = require ("./Routes/HomeCards");
 const routes = require('./Routes/routes'); // Import your routes
 const cookieParser = require('cookie-parser'); // Add cookie-parser
+const updateCourse =require("./Controllers/Course");
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./Views"));
@@ -36,16 +38,33 @@ app.use(cors({
 
 //.......Admin Routes...........
 
+
+app.put("/api/editusers/:id", router); 
+app.delete("/api/deleteuser/:id", router); 
+
+//.......Admin Routes...........
+
 app.get("/api/admin", AdminRoute);
 app.get("/api/auth", router);
 app.get("/getContact", ContactsController );
 app.get("/api/projects", projectRoute);
 app.get("/api/users", router);
 app.get("/api/courses", CourseRoute);
+app.get("/api/courses/:id", CourseRoute);
 app.get("/getAnnouncement", Announcement);
+app.get("/api/colleges", CollegeRoute);
+app.get("/api/getCards", Cards);
+
+
 
 // app.get("/api/colleges", CollegeRoute);
-app.get("/api/colleges", (req, res) => {
+app.get("/api/createCards", (req, res) => {
+  res.render('addcards'); 
+});
+app.get("/api/createAnnouncement", (req, res) => {
+  res.render('addannouncement'); 
+});
+app.get("/api/createColleges", (req, res) => {
   res.render('addcollege'); 
 });
 
@@ -60,18 +79,26 @@ app.post("/api/login", router);
 app.post("/api/contact", ContactsController);
 app.post("/api/projects", projectRoute);
 app.post("/api/createCourse", CourseRoute);
-app.post("/createAnnouncement", Announcement);
-// app.post("/api/colleges", CollegeRoute);
+app.post("/api/createAnnouncement", Announcement);
+app.post("/api/createColleges", CollegeRoute);
+app.post("/api/createCards", Cards);
 
-app.post('/api/colleges', (req, res) => {
-  const newCourseData = req.body; // Access form data (make sure body-parser is set up)
 
-  //  res.redirect('/'); 
-  console.log("aaaaaaaaaaaa");
-});
+// app.patch("/api/update-courses/:id", CourseRoute);
+// app.patch("/api/update-courses/:id").patch(updateCourse);
+app.patch("/api/update-course/:id", updateCourse);
+
+// app.post('/api/colleges', (req, res) => {
+//   const newCourseData = req.body; // Access form data (make sure body-parser is set up)
+
+//   //  res.redirect('/'); 
+//   console.log("aaaaaaaaaaaa");
+// });
 
 //...........Frontend..........
 app.get("/api/all-courses", CourseRoute);
+app.get("/api/all-Announcement", Announcement);
+app.get("/api/all-Cards", Cards);
 
 
 
