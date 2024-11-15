@@ -372,24 +372,31 @@
                 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Sr #</th>
       <th>First name</th>
-      <th>Last name</th>
+      <!-- <th>Last name</th> -->
       <th>Email</th>
       <th>Designation</th>
       <th>Institute</th>
       <th>Message</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
+    <% let serialNumber = 1; %>
     <% contacts.forEach(function(contact) { %>
       <tr>
+         <td><%= serialNumber++ %></td>
         <td><%= contact.firstname %></td>
-        <td><%= contact.lastname %></td>
+        <!-- <td><%= contact.lastname %></td> -->
         <td><%= contact.email %></td>
         <td><%= contact.designation %></td>
         <td><%= contact.institutename %></td>
         <td><%= contact.message%></td>
-      </tr>
+        <td>
+          <a href="/contact-us/<%= contact._id %>" style="color:blue;">Edit/</a>
+          <a href="/delete-contact/<%= contact._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+        </tr>
     <% }) %>
   </tbody>
 </table>

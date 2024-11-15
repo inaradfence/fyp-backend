@@ -379,16 +379,23 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                   
+                      <th>Sr #</th>
                       <th>Title</th>
                       <th>Description</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
+
+                     <% let serialNumber = 1; %>
                     <% cards.forEach(function(card){ %>
+                       <td><%= serialNumber++ %></td>
                         <td><%= card.title %></td>
                         <td><%= card.description %></td>
-                      
+                        <td>
+                          <a href="/api/cards/<%= card._id %>" style="color:blue;">Edit/</a>
+                          <a href="/deletecard/<%= card._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+                                             
                      </tr>
                     <% }) %>
                   </tbody> 

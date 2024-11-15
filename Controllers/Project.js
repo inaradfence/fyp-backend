@@ -10,6 +10,7 @@ console.log("Create a new project");
       description,
       url,
       file,
+      username
      
     }=req.body;
 
@@ -20,7 +21,7 @@ const project = new Project({
   description,
   url,
   file,
-  
+  username
 });
 console.log("Received project:", req.body);
     await project.save();
@@ -63,18 +64,20 @@ console.log("Received project:", req.body);
 
 // Update a project by ID
  const updateProject = async (req, res) => {
+  console.log("you will update here");
   try {
-    const { title, description, url, file} = req.body;
+    const { title, description, url, file, username} = req.body;
     console.log("Request body:", req.params);   
      const project = await Project.findByIdAndUpdate(
       req.params.id,
-      { title, description, url, file }, 
+      { title, description, url, file, username }, 
       { new: true});
     console.log("update project", project);
     if (!project) {
       return res.status(404).send({ message: 'Project not found' });
     }
-    res.render('projects', { project} );
+    const projects = await Project.find();
+    res.render('projects', { projects } );
     console.log("prject diplayed", project);
   } catch (err) {
     res.status(500).send(err);

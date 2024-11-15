@@ -1,29 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const  {createContactUs,getAllContacts,} =require( '../Controllers/Contact');
+const  { createContactUs,
+    getAllContacts,
+    getUserById,
+    updateContact,
+    deleteContact} =require( '../Controllers/Contact');
 
 // Get all contact us messages
 router.get('/getContact', getAllContacts);
 
-// Create a new contact us message
-console.log('contact route is going great');
-
 router.post('/api/contact', createContactUs);
 
 // Middleware to get contact us message by ID
-// router.use('/contact-us/:id', getContactUsMessageById);
+router.get('/contact-us/:id', getUserById );
 
-// Update a contact us message
-// router.patch('/contact-us/:id', updateContactUsMessage);
-
-// Get a contact us message by ID
-// router.get('/contact-us/:id', (req, res) => {
-//   res.json(res.contactUsMessage);
-// });
+router.post('/update-contact/:id', updateContact );
 
 // Delete a contact us message
-// router.delete('/contact-us/:id', deleteContactUsMessage);
+router.get('/delete-contact/:id', deleteContact);
 
 module.exports = router;
 

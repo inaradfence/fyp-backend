@@ -380,6 +380,7 @@
                   <thead>
                     <tr>
                    
+                      <th scope-col>Sr #</th>
                       <th scope-col>Course Title</th>
                       <th scope-col>Description</th>
                       <th scope-col>Image</th>
@@ -387,7 +388,9 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <% let serialNumber = 1; %>
                     <% courses.forEach(function(course){ %>
+                      <td><%= serialNumber++ %></td>
                         <td><%= course.courseTitle %></td>
                         <td><%= course.description %></td>
                         <td><%= course.image %></td>

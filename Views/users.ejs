@@ -372,6 +372,7 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
+                      <th ">Sr No</th>
                       <th ">First name</th>
                       <th ">Email</th>
                       <th ">Designation</th>
@@ -381,16 +382,17 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <% let serialNumber = 1; %>
                     <% users.forEach(function(user){ %>
                       <tr>
-                       
+                        <td><%= serialNumber++ %></td>
                         <td><%= user.firstname %></td>
                          <td><%= user.email %></td>
                         <td><%= user.designation %></td>
                         <td><%= user.institute %></td>
                         <td>
-                          <a href="/api/courses/<%= user._id %>" style="color:blue;">Edit/</a>
-                          <a href="/api/deletecourses/<%= user._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+                          <a href="/api/user/<%= user._id %>" style="color:blue;">Edit/</a>
+                          <a href="/api/deleteuser/<%= user._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
                         </tr>
                     <% }) %>
                   </tbody>

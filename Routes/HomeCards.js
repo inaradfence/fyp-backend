@@ -9,8 +9,8 @@ router.get('/api/all-Cards', HomeCards.getCardsJson);  //Frontend
 
 router.get('/api/cards/:id', HomeCards.getCardById);
 
-router.put('/cards/:id', HomeCards.updateCard);
+router.post('/update-card/:id', HomeCards.updateCard);
 
-router.delete('/cards/:id', HomeCards.deleteCard);
+router.get('/deletecard/:id', HomeCards.deleteCard);
 
 module.exports = router;

@@ -30,7 +30,7 @@ const register = async (req, res) => {
           return res.status(400).json({ msg: "Email already exists" });
       }
 
-      console.log("User data:", req.body);
+
 
       // Create new user
       const userCreated = await User.create({ 
@@ -44,6 +44,8 @@ const register = async (req, res) => {
       });
 
       console.log("User created successfully.");
+      res.status(200).json({ msg: "User created successfully", userCreated });
+      
           
   } catch (error) {
       console.error("Error:", error);  // Log the full error
@@ -67,36 +69,25 @@ const register = async (req, res) => {
 
 
   const loginUser = async (req, res) => {
-    console.log("login 1");
-    const { email, password } = req.body;
-    console.log("login 2");
   
+    const { email, password } = req.body;
+   
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required' });
     }
-    console.log("login 3");
-  
     try {
       // Find the user by email
       const user = await User.findOne({ email });
-    console.log("login 4");
-
       if (!user) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-    console.log("login 5");
-
   
       // Check if the password matches
       const isMatch = await bcrypt.compare(password, user.password);
-    console.log("login 6");
-
-      if (!isMatch) {
+       if (!isMatch) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-    console.log("login 7");
-
-  
+ 
       // Create a JWT token
       const token = jwt.sign(
         
@@ -104,7 +95,7 @@ const register = async (req, res) => {
         'your_jwt_secret', // Use a secret key from environment variables
         { expiresIn: '1h' } // Token expiration
       );
-      console.log("login 9");
+   
       // Respond with token and user data
       res.json({ token, user: { id: user._id, email: user.email } });
     } catch (err) {
@@ -116,52 +107,66 @@ const register = async (req, res) => {
   const deleteUser = async (req, res) => {
     console.log("Entering delete function");
     try {
-      const userId = req.params.id;
-      console.log("User ID to delete:", userId);
-  
-      // Find the user by ID and delete
-      const user = await User.findById(userId);
+      console.log("User ID to delete:", req.params.id);
+        // Find the user by ID and delete
+      const user = await User.findByIdAndDelete(req.params.id);
       console.log("User found");
   
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-  
-      // Delete the user
-      await user.delete();  // Explicitly call delete() on the user document
-  
+      const users = await User.find(); // Fetch all users
+      res.render('users', { users } );     
       console.log("User deleted successfully");
   
-      // Redirect after successful deletion
-      res.redirect('/api/users');
     } catch (error) {
       console.error("Error deleting user:", error);
     
     }
   };
   
-  const updateUser = async (req, res) => {
+
+  const getUserById = async (req, res) => {
+    console.log("Fetching user by ID...");
     try {
-      const userId = req.params.id;
+        const user = await User.findById(req.params.id); // Fetch user by ID
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        console.log(user);
+        res.render('updateuser', { user }); // Render the EJS template with user data
+       
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+  const updateUser = async (req, res) => {
+    console.log("you will update here");
+    try {
+     
       const { firstname, lastname, email, address, designation, institute } = req.body;
-  
+      console.log("Request body:", req.params);
       // Update user information
       const updatedUser = await User.findByIdAndUpdate(
-        userId,
+        req.params.id,
         { firstname, lastname, email, address, designation, institute },
         { new: true } // Return the updated document
       );
-  
+      console.log("updated data", updateUser);
       if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
       }
-  
-      res.status(200).json({ message: "User updated successfully", user: updatedUser });
+      const users = await User.find(); // Fetch all users
+      res.render('users', { users } );
     } catch (error) {
       console.error("Error updating user:", error);
       res.status(500).json({ message: error.message });
     }
   };
   
-  module.exports = { home, register, getAllUsers, loginUser, deleteUser, updateUser };
+  module.exports = { home, register, getAllUsers, getUserById, loginUser, deleteUser, updateUser };
   

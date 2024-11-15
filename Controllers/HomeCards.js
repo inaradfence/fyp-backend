@@ -30,6 +30,7 @@ const getCards = async (req, res) => {
 //Frontend
 const getCardsJson = async (req, res) => {
     try {
+    console.log("cards are here");
         const cards = await HomeCard.find();
         res.status(200).json(cards);
         console.log(cards);
@@ -40,12 +41,15 @@ const getCardsJson = async (req, res) => {
 
 // Get a single card by ID
 const getCardById = async (req, res) => {
+  console.log("getCardById here", req.params);
     try {
         const card = await HomeCard.findById(req.params.id);
         if (!card) {
             return res.status(404).json({ message: 'Card not found' });
         }
-        res.status(200).json(card);
+        res.render('updatecard',{ card});
+        console.log("rendered");
+
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -53,15 +57,19 @@ const getCardById = async (req, res) => {
 
 // Update a card by ID
 const updateCard = async (req, res) => {
+  console.log("you will update here");
     try {
-        const updatedCard = await HomeCard.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        });
+    const { title, description } = req.body;
+        
+        const updatedCard = await HomeCard.findByIdAndUpdate(
+            req.params.id,
+            { title, description },
+            { new: true });
         if (!updatedCard) {
             return res.status(404).json({ message: 'Card not found' });
         }
-        res.status(200).json(updatedCard);
+        const cards = await HomeCard.find();
+        res.render("cards",{cards});
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -74,7 +82,8 @@ const deleteCard = async (req, res) => {
         if (!deletedCard) {
             return res.status(404).json({ message: 'Card not found' });
         }
-        res.status(200).json({ message: 'Card deleted successfully' });
+        const cards = await HomeCard.find();
+        res.render("cards",{cards});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

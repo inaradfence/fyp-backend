@@ -39,12 +39,6 @@ app.use(cors({
 
 //.......Admin Routes...........
 
-
-app.put("/api/editusers/:id", router); 
-app.delete("/api/deleteuser/:id", router); 
-
-//.......Admin Routes...........
-
 app.get("/api/admin", AdminRoute);
 app.get("/api/auth", router);
 app.get("/getContact", ContactsController );
@@ -53,7 +47,11 @@ app.get("/api/users", router);
 app.get("/api/courses", CourseRoute);
 app.get("/api/courses/:id", CourseRoute);   //show editpage
 app.get("/api/project/:id", projectRoute);  //show editpage
+app.get("/api/user/:id", router);  //show editpage
+app.get("/contact-us/:id", ContactsController );  //show editpage
+app.get("/api/cards/:id", Cards);  //show editpage
 app.get("/getAnnouncement", Announcement);
+app.get("/Announcement/:id", Announcement);
 app.get("/api/colleges", CollegeRoute);
 app.get("/api/getCards", Cards);
 
@@ -90,7 +88,13 @@ app.post("/api/update-courses/:id", CourseRoute);
 app.get("/api/deletecourses/:id", CourseRoute);
 app.post("/api/update-project/:id", projectRoute);
 app.get("/api/delete-projects/:id", projectRoute);
-
+app.post("/api/update-user/:id", router);
+app.get("/api/deleteuser/:id", router);
+app.post("/update-contact/:id", ContactsController);
+app.get("/delete-contact/:id", ContactsController);
+app.post("/updateAnnouncement/:id", Announcement);
+app.post("/update-card/:id", Cards);
+app.get("/deletecard/:id", Cards);
 
 
 //...........Frontend..........

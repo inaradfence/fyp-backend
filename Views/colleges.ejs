@@ -378,20 +378,25 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                     
+                      <th>Sr #</th>
                       <th> College Name</th>
                       <th> City</th>
                       <th> Course</th>
+                      <th> Actions</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <% let serialNumber = 1; %>
                     <% colleges.forEach(function(college){ %>
-                      
+                      <td><%= serialNumber++ %></td>
                         <td><%= college.collegeName %></td>
                         <td><%= college.city %></td>
                         <td><%= college.courses %></td>
-                        <td><%= college.designation %></td>
-                        <td><%= college.institute %></td>
+                        <td>
+                          <a href="" style="color:blue;">Edit/</a>
+                          <a href="" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+                                             
+                     </tr>
                       </tr>
                     <% }) %>
                   </tbody>

@@ -30,7 +30,7 @@ const mongoose = require('mongoose');
 const CollegeSchema = new mongoose.Schema({
     collegeName: { type: String, required: true },
     city: { type: String, required: true },
-    course: { type: String, required: true }
+    course: [{ type: String, required: true }]
 });
 
 module.exports = mongoose.model('College', CollegeSchema);

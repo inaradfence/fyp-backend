@@ -372,6 +372,7 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
+                      <th>Sr #</th>
                       <th>Title</th>
                       <th>URL</th>
                       <th>File</th>
@@ -381,7 +382,9 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <% let serialNumber = 1; %>
                     <% projects.forEach(function(project){ %>
+                      <td><%= serialNumber++ %></td>
                         <td><%= project.title %></td>
                         <td><%= project.url %></td>
                         <td><%= project.file %></td>
