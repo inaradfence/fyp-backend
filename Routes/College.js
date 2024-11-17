@@ -9,12 +9,12 @@ router.post('/api/createColleges', CollegeController.createCollege);
 router.get('/api/colleges', CollegeController.getAllColleges);
 
 // Route to get a specific college by ID
-router.get('/api/colleges/:id', CollegeController.getCollegeById);
+router.get('/api/college/:id', CollegeController.getCollegeById);
 
 // Route to update a college by ID
-router.put('/api/colleges/:id', CollegeController.updateCollege);
+router.post('/api/update-college/:id', CollegeController.updateCollege);
 
 // Route to delete a college by ID
-router.delete('/api/colleges/:id', CollegeController.deleteCollege);
+router.get('/api/delete-college/:id', CollegeController.deleteCollege);
 
 module.exports = router;

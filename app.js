@@ -39,25 +39,30 @@ app.use(cors({
 
 //.......Admin Routes...........
 
-app.get("/api/admin", AdminRoute);
-app.get("/api/auth", router);
 app.get("/getContact", ContactsController );
+app.get("/contact-us/:id", ContactsController );  //show editpage
+
 app.get("/api/projects", projectRoute);
+app.get("/api/project/:id", projectRoute);  //show editpage
+
 app.get("/api/users", router);
+app.get("/api/user/:id", router);  //show editpage
+
 app.get("/api/courses", CourseRoute);
 app.get("/api/courses/:id", CourseRoute);   //show editpage
-app.get("/api/project/:id", projectRoute);  //show editpage
-app.get("/api/user/:id", router);  //show editpage
-app.get("/contact-us/:id", ContactsController );  //show editpage
-app.get("/api/cards/:id", Cards);  //show editpage
-app.get("/getAnnouncement", Announcement);
-app.get("/Announcement/:id", Announcement);
-app.get("/api/colleges", CollegeRoute);
+
 app.get("/api/getCards", Cards);
+app.get("/api/cards/:id", Cards);  //show editupdate
+
+app.get("/getAnnouncement", Announcement);
+app.get("/Announcement/:id", Announcement);//editpage
+
+app.get("/api/colleges", CollegeRoute);
+app.get("/api/college/:id", CollegeRoute); //edit page
 
 
+//................ create ..............
 
-// app.get("/api/colleges", CollegeRoute);
 app.get("/api/createCards", (req, res) => {
   res.render('addcards'); 
 });
@@ -83,24 +88,30 @@ app.post("/api/createAnnouncement", Announcement);
 app.post("/api/createColleges", CollegeRoute);
 app.post("/api/createCards", Cards);
 
+
 //Edit and Delete
 app.post("/api/update-courses/:id", CourseRoute);
 app.get("/api/deletecourses/:id", CourseRoute);
 app.post("/api/update-project/:id", projectRoute);
-app.get("/api/delete-projects/:id", projectRoute);
+app.get("/api/delete-project/:id", projectRoute);
 app.post("/api/update-user/:id", router);
 app.get("/api/deleteuser/:id", router);
 app.post("/update-contact/:id", ContactsController);
 app.get("/delete-contact/:id", ContactsController);
 app.post("/updateAnnouncement/:id", Announcement);
+app.get("/updateAnnouncement/:id", Announcement);
 app.post("/update-card/:id", Cards);
 app.get("/deletecard/:id", Cards);
+app.post("/api/update-college/:id", CollegeRoute); 
+app.get("/api/delete-college/:id", CollegeRoute); 
+
 
 
 //...........Frontend..........
 app.get("/api/all-courses", CourseRoute);
 app.get("/api/all-Announcement", Announcement);
 app.get("/api/all-Cards", Cards);
+app.get("/api/showprojects", projectRoute);
 
 
 

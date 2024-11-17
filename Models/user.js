@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 console.log('schema is here');
@@ -56,9 +57,18 @@ userSchema.pre('save', async function (next) {
 })
 
 
+userSchema.methods.getjsonwebtoken = async function () {
 
+  const token = await jwt.sign({ id: this._id }, 'secret', {
+      expiresIn: '7d'
+  });
+
+  return token
+
+}
 
 
 // Create the User model from the schema
 const User = new mongoose.model("User", userSchema); 
 module.exports = User;
+

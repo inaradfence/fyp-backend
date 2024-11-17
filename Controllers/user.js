@@ -1,6 +1,7 @@
 const User = require('../Models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const jwtToken= require ('../Db/utils/jwttoken');
 
 const home = async (req, res) => {
     try {
@@ -81,13 +82,15 @@ const register = async (req, res) => {
       if (!user) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-  
+      
       // Check if the password matches
       const isMatch = await bcrypt.compare(password, user.password);
        if (!isMatch) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
- 
+      console.log("login successful");
+      
+      // jwtToken (user, 200, res);
       // Create a JWT token
       const token = jwt.sign(
         
@@ -142,6 +145,23 @@ const register = async (req, res) => {
     }
 };
 
+  const getUserByIdJson = async (req, res) => {
+    console.log("Fetching user by ID...");
+    try {
+        const user = await User.findById(req.params.id); // Fetch user by ID
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        console.log(user);
+        res.render('updateuser', { user }); // Render the EJS template with user data
+       
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 
 
   const updateUser = async (req, res) => {
@@ -168,5 +188,5 @@ const register = async (req, res) => {
     }
   };
   
-  module.exports = { home, register, getAllUsers, getUserById, loginUser, deleteUser, updateUser };
+  module.exports = { home, register, getAllUsers, getUserById, loginUser, deleteUser, updateUser, getUserByIdJson };
   

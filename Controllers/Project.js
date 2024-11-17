@@ -9,9 +9,7 @@ console.log("Create a new project");
       title,
       description,
       url,
-      file,
-      username
-     
+      file,   
     }=req.body;
 
 console.log("project created");
@@ -21,7 +19,6 @@ const project = new Project({
   description,
   url,
   file,
-  username
 });
 console.log("Received project:", req.body);
     await project.save();
@@ -39,6 +36,16 @@ console.log("Received project:", req.body);
   try {
     const projects = await Project.find();
     res.render('projects', { projects } );
+    console.log("prject diplayed");
+      } catch (err) {
+    res.status(500).send(err);
+  }
+};
+// Get all projects
+ const getAllProjectsJson = async (req, res) => {
+  try {
+    const projects = await Project.find();
+    res.status(200).json(projects);
     console.log("prject diplayed");
       } catch (err) {
     res.status(500).send(err);
@@ -66,7 +73,7 @@ console.log("Received project:", req.body);
  const updateProject = async (req, res) => {
   console.log("you will update here");
   try {
-    const { title, description, url, file, username} = req.body;
+    const { title, description, url, file} = req.body;
     console.log("Request body:", req.params);   
      const project = await Project.findByIdAndUpdate(
       req.params.id,
@@ -86,7 +93,9 @@ console.log("Received project:", req.body);
 
 // Delete a project by ID
  const deleteProject = async (req, res) => {
-  try {
+ console.log("delete project here");
+ console.log(req.params);
+      try {
       const deletedProject = await Project.findByIdAndDelete(req.params.id);
     if (!deletedProject) {
       return res.status(404).send({ message: 'Project not found' });
@@ -101,5 +110,5 @@ console.log("Received project:", req.body);
 
 
 module.exports={
-  deleteProject,updateProject,getProjectById,getAllProjects,createProject
+  deleteProject, getAllProjectsJson,updateProject,getProjectById,getAllProjects,createProject
 };

@@ -321,18 +321,28 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Update Card</h4>
-                                <form action="/update-card/<%= card._id %>" method="POST">
+                                <h4 class="card-title">Update College</h4>
+                                <form action="/api/update-college/<%= college._id %>" method="POST">
                                   <div class="form-group">
-                                      <label for="name"> Title</label>
-                                      <input type="text" id="name" name="title" value="<%= card.title %>" class="form-control" required>
+                                      <label for="name">College Name</label>
+                                      <input type="text" id="name" name="courseTitle" value="<%= college.collegeName %>" class="form-control" required>
                                   </div>
                                   <div class="form-group">
-                                      <label for="description">Description</label>
-                                      <textarea type="text" 
-                                      style="width: 383px; height: 150px;"  
-                                      id="description" name="description" 
-                                      class="form-control" required> <%=card.description %> </textarea>
+                                      <label for="description">Location</label>
+                                      <input type="text"  id="description" name="location" value="<%=college.location %>" class="form-control" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="region" class="form-label">Course</label>
+                                    <select class="form-control" name="course[]">
+                                      <option value="">Select Course</option>
+                                      <% allCourses.forEach(function(course){ %>
+                                        <option value="<%= course._id %>" 
+                                          <% if (college.course && college.course.includes(course._id.toString())) { %> 
+                                            selected 
+                                          <% } %>
+                                        ><%= course.courseTitle %></option> <!-- Populate with all courses -->
+                                      <% }) %>
+                                    </select>
                                   </div>
                                   <button type="submit" class="btn btn-primary">Update</button>
                                   <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>

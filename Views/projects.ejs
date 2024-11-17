@@ -377,8 +377,7 @@
                       <th>URL</th>
                       <th>File</th>
                       <th>Decription</th>
-                      <th>Created At</th>
-                      <th>Actions</th>
+                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -389,9 +388,8 @@
                         <td><%= project.url %></td>
                         <td><%= project.file %></td>
                         <td><%= project.description %></td>
-                        <td><%= project.createdAt %></td>
-                       <td> <a href="/api/project/<%= project._id %>" style="color:blue;">Edit/</a>
-                        <a href="/api/delete-projects/<%= project._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
+                          <td> <a href="/api/project/<%= project._id %>" style="color:blue;">Edit/</a>
+                        <a href="/api/delete-project/<%= project._id %>" onclick="return confirm('Are you sure, you want to Delete this ?')" style="color:red;">Delete</a></td>
                       </tr>
                     <% }) %>
                   </tbody>

@@ -329,7 +329,10 @@
                                   </div>
                                   <div class="form-group">
                                       <label for="description">Description</label>
-                                      <input type="text" id="description" name="description" value="<%=course.description %>" class="form-control" required>
+                                      <textarea type="text" 
+                                      style="width: 383px; height: 150px;" 
+                                       id="description" name="description"
+                                       class="form-control" required><%=course.description %></textarea>
                                   </div>
                                   <button type="submit" class="btn btn-primary">Update</button>
                                   <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
