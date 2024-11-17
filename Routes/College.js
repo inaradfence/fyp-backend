@@ -7,6 +7,7 @@ router.post('/api/createColleges', CollegeController.createCollege);
 
 // Route to get all colleges
 router.get('/api/colleges', CollegeController.getAllColleges);
+router.get('/api/all-colleges', CollegeController.getAllCollegeJson);
 
 // Route to get a specific college by ID
 router.get('/api/college/:id', CollegeController.getCollegeById);

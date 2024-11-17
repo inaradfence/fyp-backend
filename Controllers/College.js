@@ -103,7 +103,33 @@ const deleteCollege = async (req, res) => {
     res.status(500).json({ message: 'Failed to delete college', error });
   }
 };
+const getAllCollegeJson = async (req, res) => {
+  try {
+    const collegeId = req.params.collegeId; // College ID (from the URL parameter)
 
+    if (collegeId) {
+      // Fetch courses for a specific college by its ID
+      const college = await College.findById(collegeId).populate('course'); // Populate with course data
+      
+      if (!college) {
+        return res.status(404).json({ message: 'College not found.' });
+      }
+
+      return res.status(200).json({ type: 'courses', data: college.course });
+    } else {
+      // Fetch all colleges with their courses
+      const colleges = await College.find().populate('course'); // Populate course field with course data
+      
+      if (!colleges.length) {
+        return res.status(404).json({ message: 'No colleges found.' });
+      }
+
+      return res.status(200).json({ type: 'colleges', data: colleges });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to retrieve data', error });
+  }
+};
 // Export all functions as an object
 module.exports = {
   createCollege,
@@ -111,4 +137,6 @@ module.exports = {
   getCollegeById,
   updateCollege,
   deleteCollege,
+  getAllCollegeJson
 };
+
