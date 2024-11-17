@@ -8,8 +8,7 @@ console.log("Create a new project");
     const {
       title,
       description,
-      url,
-      file,   
+      url,   
       username
     }=req.body;
     const file = req.file ? req.file.path : null;

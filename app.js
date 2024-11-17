@@ -16,7 +16,7 @@ const AdminRoute = require("./Routes/Admin");
 const projectRoute = require ("./Routes/Project");
 const CourseRoute = require ("./Routes/Course");
 const CollegeRoute = require ("./Routes/College");
-const Announcement = require ("./Routes/Announcement");
+const Announcement = require ("./Routes/announcement");
 const Cards = require ("./Routes/HomeCards");
 const routes = require('./Routes/routes'); // Import your routes
 
