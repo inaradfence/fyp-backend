@@ -33,18 +33,54 @@ const getAllCourses = async (req, res) => {
   }
 };
 
+// const getAllCoursesJson = async (req, res) => {
+//   try {
+//     console.log("courses are here");
+//     const courses = await Course.find();
+//     res.status(200).json(courses);
+
+//   } catch (error) {
+//     res.status(500).json({ message: 'Failed to retrieve courses', error });
+//   }
+// };
+
 const getAllCoursesJson = async (req, res) => {
   try {
-    console.log("courses are here");
-    const courses = await Course.find();
-    res.status(200).json(courses);
+    console.log("courses are here  1");
+    const courseId = req.params.courseId; // Course ID (if provided)
+    console.log("courses are here  1");
 
+    if (courseId) {
+      // Fetch colleges offering the specific course
+      const colleges = await College.find({ course: courseId }).populate('course');
+      if (!colleges.length) {
+        return res.status(404).json({ message: 'No colleges found for this course.' });
+      }
+      return res.status(200).json({ type: 'colleges', data: colleges });
+    } else {
+      // Fetch all courses with their associated colleges
+      const courses = await Course.aggregate([
+        {
+          $lookup: {
+            from: 'colleges', // Collection name for College
+            localField: '_id', // Match Course `_id` field
+            foreignField: 'course', // Match College's `course` field
+            as: 'collegesOfferingCourse', // Alias for the joined data
+          },
+        },
+      ]);
+      return res.status(200).json({ type: 'courses', data: courses });
+    }
   } catch (error) {
-    res.status(500).json({ message: 'Failed to retrieve courses', error });
+    res.status(500).json({ message: 'Failed to retrieve data', error });
   }
 };
 
+
+
 // Controller to get a single course by ID
+
+
 const getCourseById = async (req, res) => {
   console.log("getCourseById here", req.params);
   try {

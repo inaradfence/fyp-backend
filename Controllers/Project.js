@@ -10,7 +10,9 @@ console.log("Create a new project");
       description,
       url,
       file,   
+      username
     }=req.body;
+    const file = req.file ? req.file.path : null;
 
 console.log("project created");
 
@@ -19,6 +21,7 @@ const project = new Project({
   description,
   url,
   file,
+  username
 });
 console.log("Received project:", req.body);
     await project.save();
@@ -74,10 +77,13 @@ console.log("Received project:", req.body);
   console.log("you will update here");
   try {
     const { title, description, url, file} = req.body;
-    console.log("Request body:", req.params);   
+    console.log("Request body:", req.params); 
+
+    console.log("Request body:", req.body);   
+
      const project = await Project.findByIdAndUpdate(
       req.params.id,
-      { title, description, url, file, username }, 
+      { title, description, url, file }, 
       { new: true});
     console.log("update project", project);
     if (!project) {

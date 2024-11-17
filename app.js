@@ -6,6 +6,8 @@ const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser'); // Add cookie-parser
 const connectDb= require('./Db/config');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); //
 
 // import Routes
 const router = require("./Routes/user");
@@ -78,11 +80,13 @@ app.get("/api/createCourse", (req, res) => {
 });
 
 
+
 //...........Post..........
 app.post("/api/register", router);
 app.post("/api/login", router);
 app.post("/api/contact", ContactsController);
-app.post("/api/projects", projectRoute);
+// app.post("/api/projects", projectRoute);
+app.post('/api/projects', upload.single('file'), projectRoute);
 app.post("/api/createCourse", CourseRoute);
 app.post("/api/createAnnouncement", Announcement);
 app.post("/api/createColleges", CollegeRoute);
@@ -109,6 +113,7 @@ app.get("/api/delete-college/:id", CollegeRoute);
 
 //...........Frontend..........
 app.get("/api/all-courses", CourseRoute);
+app.get("/api/all-courses/:id", CourseRoute);
 app.get("/api/all-Announcement", Announcement);
 app.get("/api/all-Cards", Cards);
 app.get("/api/showprojects", projectRoute);

@@ -11,6 +11,7 @@ const { createCourse,
 
     router.route("/api/courses").get(getAllCourses);
     router.route("/api/all-courses").get(getAllCoursesJson); //frontend route
+    router.route("/api/all-courses/:id").get(getAllCoursesJson); //frontend route
     router.route("/api/courses/:id").get(getCourseById);
     router.route("/api/createCourse").get(createCourse);
     router.route("/api/createCourse").post(createCourse);

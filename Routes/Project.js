@@ -9,6 +9,7 @@ const {
   getAllProjectsJson
 } =require('../Controllers/Project.js');
 
+debugger
 // Get all projects
 // router.get('/api/projects', getAllProjects); 
 router.route("/api/projects").get(getAllProjects);
