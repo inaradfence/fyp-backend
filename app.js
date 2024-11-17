@@ -29,7 +29,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/', routes); // Admin Route
-// ########################################################################
 
 app.use(express.json());
 app.use(bodyParser.json());
