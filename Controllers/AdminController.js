@@ -39,5 +39,21 @@ const getAllUsers = async (req, res) =>{
     }
 };
 
-module.exports = getAllUsers;
+const getCounts = async (req, res, next) => {
+  try {
+      // Fetch counts for each model
+      const userCount = await User.countDocuments();
+      // Send counts in the response
+      return res.status(200).json({
+          users: userCount,
+          
+      });
+  } catch (error) {
+      next(error);
+  }
+};
+
+
+
+module.exports = {getAllUsers,getCounts};
 // module.exports = addAdmin;

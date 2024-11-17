@@ -11083,14 +11083,14 @@ fieldset:disabled .wizard > .actions a,
 
 .btn-primary, .wizard > .actions a {
   color: #fff;
-  background-color: #5e153d;
+  background-color: hsl(327, 63%, 23%);
   border-color: #5e153d;
 }
 
 .btn-primary:hover, .wizard > .actions a:hover {
   color: #fff;
-  background-color: #3f3e91;
-  border-color: #3b3a88;
+  background-color: #4d092e;
+  border-color: #5e153d;
 }
 
 .btn-primary:focus, .wizard > .actions a:focus, .btn-primary.focus, .wizard > .actions a.focus {
@@ -28458,7 +28458,7 @@ div.tagsinput span.tag a {
 
 @media (max-width: 767px) {
   .content-wrapper {
-    padding: 1.5rem 1.5rem;
+    padding: 1rem;
   }
 }
 
