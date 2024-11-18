@@ -39,6 +39,9 @@ app.use(cors({
 }));
 
 //.......Admin Routes...........
+app.get("/api/admin", AdminRoute);
+app.get("/api/matrics", AdminRoute);
+
 
 app.get("/getContact", ContactsController );
 app.get("/contact-us/:id", ContactsController );  //show editpage
@@ -48,6 +51,7 @@ app.get("/api/project/:id", projectRoute);  //show editpage
 
 app.get("/api/users", router);
 app.get("/api/user/:id", router);  //show editpage
+app.post("/api/updateuser/:id", router);
 
 app.get("/api/courses", CourseRoute);
 app.get("/api/courses/:id", CourseRoute);   //show editpage
@@ -107,6 +111,7 @@ app.post("/update-card/:id", Cards);
 app.get("/deletecard/:id", Cards);
 app.post("/api/update-college/:id", CollegeRoute); 
 app.get("/api/delete-college/:id", CollegeRoute); 
+
 
 
 

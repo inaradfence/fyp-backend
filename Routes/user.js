@@ -24,7 +24,7 @@ router.route("/api/deleteuser/:id").get(deleteUser);
 // Route for updating a user
 router.route("/api/update-user/:id").post(updateUser);
 
-router.route("/api/profile/:id").post(updateClientUser);
+router.route("/api/updateuser/:id").post(updateClientUser);
 
 
 module.exports = router;

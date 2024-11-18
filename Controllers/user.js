@@ -183,10 +183,12 @@ const updateUser = async (req, res) => {
 };
 
 const updateClientUser = async (req, res) => {
+  console.log('request is here')
   try {
     const { firstname, lastname, email, address, designation, institute } =
       req.body;
     console.log("Request body:", req.params);
+    console.log("Request body:", req.body);
     // Update user information
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
@@ -197,8 +199,8 @@ const updateClientUser = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    const users = await User.find(); // Fetch all users
-    return res.json("users", { users });
+    //const users = await User.find(); // Fetch all users
+    res.status(200).json({ message: 'User is updated' });
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ message: error.message });
