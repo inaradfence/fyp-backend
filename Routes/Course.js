@@ -6,7 +6,9 @@ const { createCourse,
     getAllCourses,
     getCourseById,
     updateCourse,
-    deleteCourse} = require ("../Controllers/Course");
+    deleteCourse,
+    searchCourse
+} = require ("../Controllers/Course");
 
 
     router.route("/api/courses").get(getAllCourses);
@@ -19,5 +21,7 @@ const { createCourse,
     router.route("/api/update-courses/:id").post(updateCourse);
     router.route("/api/deletecourses/:id").get(deleteCourse);
 
+    //..................Search..................
+    router.route("/api/courses/search/:id").get(searchCourse);
     
 module.exports = router;

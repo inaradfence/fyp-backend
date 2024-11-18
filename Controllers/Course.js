@@ -136,6 +136,24 @@ const deleteCourse = async (req, res) => {
   }
 };
 
+//.................search course ..................
+const searchCourse = async (req, res) => {
+  console.log("you will search here");
+  console.log(req.params.id);
+  try {
+    const query = req.params.id;
+ let course = await Course.find({
+      $or: [
+  { courseTitle: { $regex: query, $options: 'i' } }
+]
+    }); 
+    res.json(course);
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching course: ' + error.message });
+  }
+};
+
+
 // Export all functions at once
 module.exports = {
   getAllCoursesJson,
@@ -143,5 +161,6 @@ module.exports = {
   getAllCourses,
   getCourseById,
   updateCourse,
-  deleteCourse
+  deleteCourse,
+  searchCourse
 };

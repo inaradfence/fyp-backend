@@ -130,6 +130,25 @@ const getAllCollegeJson = async (req, res) => {
     res.status(500).json({ message: 'Failed to retrieve data', error });
   }
 };
+
+//................search college by name
+const searchColleges = async (req, res) => {
+  console.log("you will search here");
+  console.log(req.params.id);
+  try {
+    const query = req.params.id;
+    let colleges = await College.find({
+      $or: [
+        { collegeName: { $regex: query, $options: 'i' } },
+        { location: { $regex: query, $options: 'i' } }
+      ]
+    });
+    res.json(colleges);
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching colleges: ' + error.message });
+  }
+};
+
 // Export all functions as an object
 module.exports = {
   createCollege,
@@ -137,6 +156,7 @@ module.exports = {
   getCollegeById,
   updateCollege,
   deleteCollege,
-  getAllCollegeJson
+  getAllCollegeJson,
+  searchColleges
 };
 

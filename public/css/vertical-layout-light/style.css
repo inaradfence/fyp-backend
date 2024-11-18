@@ -22104,12 +22104,12 @@ code {
 }
 
 .card.card-light-danger {
-  background: #F3797E;
+  background: #AA5486;
   color: #ffffff;
 }
 
 .card.card-light-danger:hover {
-  background: #f59095;
+  background: #CB80AB;
 }
 
 .card-inverse-primary {

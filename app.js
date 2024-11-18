@@ -119,8 +119,9 @@ app.get("/api/all-Cards", Cards);
 app.get("/api/showprojects", projectRoute);
 
 
-
-
+//..................Search..................
+app.get("/api/courses/search/:id",CourseRoute);
+app.get("/api/colleges/search/:id",CollegeRoute);
 
 
 connectDb().then(()=>{

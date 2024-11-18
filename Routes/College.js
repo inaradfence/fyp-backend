@@ -18,4 +18,6 @@ router.post('/api/update-college/:id', CollegeController.updateCollege);
 // Route to delete a college by ID
 router.get('/api/delete-college/:id', CollegeController.deleteCollege);
 
+// Route to search for colleges by name
+router.get('/api/colleges/search/:id', CollegeController.searchColleges);
 module.exports = router;

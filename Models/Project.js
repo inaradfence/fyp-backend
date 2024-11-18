@@ -16,7 +16,7 @@ const projectSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    required: true
+    // required: true
   },
 }, { timestamps: true });  // Adds createdAt and updatedAt automatically
 
