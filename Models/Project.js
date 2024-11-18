@@ -15,9 +15,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
   },
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',  // Reference to the User model
     required: true
-  }
+  },
 }, { timestamps: true });  // Adds createdAt and updatedAt automatically
 
 const Project = mongoose.model('Project', projectSchema);

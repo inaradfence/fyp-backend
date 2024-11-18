@@ -1,5 +1,14 @@
-const express = require('express');
-const { home, register, getUserById, getAllUsers, loginUser, deleteUser, updateUser } = require('../Controllers/user');
+const express = require("express");
+const {
+  home,
+  register,
+  getUserById,
+  getAllUsers,
+  loginUser,
+  deleteUser,
+  updateUser,
+  updateClientUser,
+} = require("../Controllers/user");
 const router = express.Router();
 
 router.route("/api/login").post(loginUser);
@@ -14,5 +23,8 @@ router.route("/api/deleteuser/:id").get(deleteUser);
 
 // Route for updating a user
 router.route("/api/update-user/:id").post(updateUser);
+
+router.route("/api/profile/:id").post(updateClientUser);
+
 
 module.exports = router;

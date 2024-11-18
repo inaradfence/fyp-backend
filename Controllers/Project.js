@@ -3,19 +3,19 @@ const Project = require("../Models/Project");
 console.log("Create a new project");
 
 const createProject = async (req, res) => {
-  console.log("Create a new project");
+  console.log("Create a new project",req);
   try {
-    const { title, description, url, user } = req.body;
+    const { title, description, url,user } = req.body;
     const file = req.file ? req.file.path : null;
 
-    console.log("project created");
+    console.log("project created",title,description,url,file);
 
     const project = new Project({
       title,
       description,
       url,
       file,
-      user,
+      user
     });
     console.log("Received project:", req.body);
     await project.save();
@@ -39,9 +39,22 @@ const getAllProjects = async (req, res) => {
 // Get all projects
 const getAllProjectsJson = async (req, res) => {
   try {
-    const projects = await Project.find();
-    res.status(200).json(projects);
-    console.log("prject diplayed");
+    // Find projects and populate the user field
+    const projects = await Project.find().populate('user');
+
+    // Map through projects to handle null users
+    const projectsWithUserCheck = projects.map(project => {
+      if (!project.user) {
+        return {
+          ...project._doc,
+          user: null
+        };
+      }
+      return project;
+    });
+
+    res.status(200).json(projectsWithUserCheck);
+    console.log("Projects displayed");
   } catch (err) {
     res.status(500).send(err);
   }
