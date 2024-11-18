@@ -48,6 +48,7 @@ const getCounts = async (req, res, next) => {
     const collegeCount = await College.countDocuments();
     const courseCount = await Course.countDocuments();
     const projectCount = await Project.countDocuments();
+    // const cards = await Card.countDocuments();
 
     // Send counts in the response
     return res.status(200).json({
