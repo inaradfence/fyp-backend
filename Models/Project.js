@@ -14,10 +14,10 @@ const projectSchema = new mongoose.Schema({
   file: {
     type: String,
   },
-  username: {
+  user: {
     type: String,
-    // required: true
-  },
+    required: true
+  }
 }, { timestamps: true });  // Adds createdAt and updatedAt automatically
 
 const Project = mongoose.model('Project', projectSchema);
