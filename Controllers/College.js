@@ -103,28 +103,67 @@ const deleteCollege = async (req, res) => {
     res.status(500).json({ message: 'Failed to delete college', error });
   }
 };
+// const getAllCollegeJson = async (req, res) => {
+//   try {
+//     const req.params.id = req.params.req.params.id; // College ID (from the URL parameter)
+
+//     if (req.params.id) {
+//       // Fetch courses for a specific college by its ID
+//       const college = await College.findById(req.params.id).populate('course'); // Populate with course data
+      
+//       if (!college) {
+//         return res.status(404).json({ message: 'College not found.' });
+//       }
+
+//       return res.status(200).json({ type: 'courses', data: college.course });
+//     } else {
+//       // Fetch all colleges with their courses
+//       const colleges = await College.find().populate('course'); // Populate course field with course data
+      
+//       if (!colleges.length) {
+//         return res.status(404).json({ message: 'No colleges found.' });
+//       }
+
+//       return res.status(200).json({ type: 'colleges', data: colleges });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: 'Failed to retrieve data', error });
+//   }
+// };
+
+
+
 const getAllCollegeJson = async (req, res) => {
   try {
-    const collegeId = req.params.collegeId; // College ID (from the URL parameter)
+    console.log("getAllCollegeJson called");
+    console.log("req.params.id:", req.params.id);
 
-    if (collegeId) {
+    if (req.params.id) {
       // Fetch courses for a specific college by its ID
-      const college = await College.findById(collegeId).populate('course'); // Populate with course data
-      
+      const college = await College.findById(req.params.id).populate('course'); // Populate course data
+
       if (!college) {
         return res.status(404).json({ message: 'College not found.' });
       }
 
-      return res.status(200).json({ type: 'courses', data: college.course });
+      return res.status(200).json({
+        message: `Courses offered by ${college.collegeName}`,
+        type: 'courses',
+        data: college.course,
+      });
     } else {
       // Fetch all colleges with their courses
-      const colleges = await College.find().populate('course'); // Populate course field with course data
-      
+      const colleges = await College.find().populate('course');
+
       if (!colleges.length) {
         return res.status(404).json({ message: 'No colleges found.' });
       }
 
-      return res.status(200).json({ type: 'colleges', data: colleges });
+      return res.status(200).json({
+        message: 'All colleges and their courses',
+        type: 'colleges',
+        data: colleges,
+      });
     }
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve data', error });

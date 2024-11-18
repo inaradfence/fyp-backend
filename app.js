@@ -112,11 +112,14 @@ app.get("/api/delete-college/:id", CollegeRoute);
 
 //...........Frontend..........
 app.get("/api/all-courses", CourseRoute);
-app.get("/api/all-colleges", CollegeRoute);
 app.get("/api/all-courses/:id", CourseRoute);
 app.get("/api/all-Announcement", Announcement);
 app.get("/api/all-Cards", Cards);
 app.get("/api/showprojects", projectRoute);
+app.get("/api/all-colleges", CollegeRoute);
+app.get("/api/all-colleges/:id", CollegeRoute);
+
+
 
 
 //..................Search..................

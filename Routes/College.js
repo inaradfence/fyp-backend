@@ -7,7 +7,7 @@ router.post('/api/createColleges', CollegeController.createCollege);
 
 // Route to get all colleges
 router.get('/api/colleges', CollegeController.getAllColleges);
-router.get('/api/all-colleges', CollegeController.getAllCollegeJson);
+
 
 // Route to get a specific college by ID
 router.get('/api/college/:id', CollegeController.getCollegeById);
@@ -18,6 +18,9 @@ router.post('/api/update-college/:id', CollegeController.updateCollege);
 // Route to delete a college by ID
 router.get('/api/delete-college/:id', CollegeController.deleteCollege);
 
+// ........................frontend routes........................
+router.get('/api/all-colleges', CollegeController.getAllCollegeJson);
+router.get('/api/all-colleges/:id', CollegeController.getAllCollegeJson);
 // Route to search for colleges by name
 router.get('/api/colleges/search/:id', CollegeController.searchColleges);
 module.exports = router;
