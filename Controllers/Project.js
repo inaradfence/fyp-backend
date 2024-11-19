@@ -3,12 +3,12 @@ const Project = require("../Models/Project");
 console.log("Create a new project");
 
 const createProject = async (req, res) => {
-  console.log("Create a new project",req);
+  console.log("Create a new project", req);
   try {
-    const { title, description, url,user } = req.body;
+    const { title, description, url, user } = req.body;
     const file = req.file ? req.file.path : null;
 
-    console.log("project created",title,description,url,file);
+    console.log("project created", title, description, url, file);
 
     const project = new Project({
       title,
@@ -82,6 +82,7 @@ const updateProject = async (req, res) => {
   console.log("you will update here");
   try {
     const { title, description, url, file } = req.body;
+
     console.log("Request body:", req.params);
 
     console.log("Request body:", req.body);
@@ -96,7 +97,8 @@ const updateProject = async (req, res) => {
       return res.status(404).send({ message: "Project not found" });
     }
     const projects = await Project.find();
-    res.render("projects", { projects });
+    res.redirect("/api/showprojects");
+
     console.log("prject diplayed", project);
   } catch (err) {
     res.status(500).send(err);
