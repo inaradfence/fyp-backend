@@ -50,11 +50,11 @@ const getCounts = async (req, res, next) => {
     const projectCount = await Project.countDocuments();
 
     // Send counts in the response
-    return res.status(200).json({
-      users: userCount,
-      colleges: collegeCount,
-      courses: courseCount,
-      projects: projectCount,
+  res.render("dashboard", {
+      users: userCount ? userCount:0,
+      colleges: collegeCount ? collegeCount:0,
+      courses: courseCount ? courseCount:0,
+      projects: projectCount ? projectCount:0,
     });
   } catch (error) {
     next(error);
